@@ -38,7 +38,7 @@ val_loader = DataLoader(val_dataset, batch_size=4)
 model = UNet(in_channels=4, out_channels=1).to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
 
-# --- Loss functions ---
+# Loss functions
 class FocalLoss(torch.nn.Module):
     def __init__(self, gamma=2.0, alpha=0.75):
         super().__init__()
@@ -117,7 +117,7 @@ def iou_score(pred, target, threshold=0.5, smooth=1e-6):
     return ((intersection + smooth) / (union + smooth)).item()
 
 # Training loop
-EPOCHS = 10
+EPOCHS = 100
 best_iou = 0.0
 
 for epoch in range(EPOCHS):

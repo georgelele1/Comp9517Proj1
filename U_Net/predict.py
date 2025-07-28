@@ -1,15 +1,14 @@
-print("predict.py started")
-
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
-import cv2
-from U_Net import UNetPP
+from U_Net import UNet
 from dataset import SegmentationDataset
 import pickle
 import os
 
-# --- Configuration ---
+print("predict.py started")
+
+# Configuration
 model_path = "UNet_forest_best.pth"
 test_samples_pkl = "test_samples.pkl"
 save_dir = "predict_results"
@@ -28,7 +27,7 @@ def compute_iou(pred, mask, threshold=0.5):
     return float((intersection / union).item())
 
 # Load trained model
-model = UNetPP(in_channels=4, out_channels=1).to(device)
+model = UNet(in_channels=4, out_channels=1).to(device)
 model.load_state_dict(torch.load(model_path, map_location=device, weights_only=True))
 model.eval()
 
