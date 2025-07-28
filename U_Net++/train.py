@@ -38,7 +38,7 @@ val_loader = DataLoader(val_dataset, batch_size=8)
 model = UNetPP(in_channels=4, out_channels=1).to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
 
-# --- Loss functions ---
+# Loss functions
 class FocalLoss(torch.nn.Module):
     def __init__(self, gamma=2.0, alpha=0.75):
         super().__init__()
