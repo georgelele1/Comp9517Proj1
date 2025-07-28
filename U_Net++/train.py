@@ -117,7 +117,7 @@ def iou_score(pred, target, threshold=0.5, smooth=1e-6):
     return ((intersection + smooth) / (union + smooth)).item()
 
 # Training loop
-EPOCHS = 10
+EPOCHS = 100
 best_iou = 0.0
 
 for epoch in range(EPOCHS):
