@@ -31,8 +31,8 @@ print("Validation set index has been saved to test_samples.pkl")
 # Create datasets and dataloaders
 train_dataset = SegmentationDataset(train_rgb, train_nrg, train_mask)
 val_dataset = SegmentationDataset(val_rgb, val_nrg, val_mask)
-train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True)
-val_loader = DataLoader(val_dataset, batch_size=8)
+train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True)
+val_loader = DataLoader(val_dataset, batch_size=4)
 
 # Model setup
 model = UNetPP(in_channels=4, out_channels=1).to(device)

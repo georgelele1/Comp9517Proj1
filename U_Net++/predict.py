@@ -1,5 +1,3 @@
-print("predict.py started")
-
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,7 +6,9 @@ from dataset import SegmentationDataset
 import pickle
 import os
 
-# --- Configuration ---
+print("predict.py started")
+
+# Configuration
 model_path = "UNetPP_forest_best.pth"
 test_samples_pkl = "test_samples.pkl"
 save_dir = "predict_results"

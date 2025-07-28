@@ -4,7 +4,7 @@ import torch
 from torch.utils.data import Dataset
 
 class SegmentationDataset(Dataset):
-    def __init__(self, rgb_paths, nrg_paths, mask_paths, size=(512, 512)):
+    def __init__(self, rgb_paths, nrg_paths, mask_paths, size=(256, 256)):
         self.rgb_paths = rgb_paths
         self.nrg_paths = nrg_paths
         self.mask_paths = mask_paths
