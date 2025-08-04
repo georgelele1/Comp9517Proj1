@@ -18,7 +18,7 @@ class DoubleConv(nn.Module):
 
 # U-Net main structure
 class UNet(nn.Module):
-    def __init__(self, in_channels=3, out_channels=1):
+    def __init__(self, in_channels=4, out_channels=1):
         super().__init__()
 
         # Encoder (downsampling)
@@ -74,3 +74,4 @@ class UNet(nn.Module):
         # Output layer (no activation, use sigmoid in training/testing)
         out = self.out_conv(u4)
         return out
+
