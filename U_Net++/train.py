@@ -272,8 +272,6 @@ def main():
         for k, v in best_metrics.items():
             f.write(f"{k}: {v:.4f}\n")
 
-    model_path = os.path.join(save_folder, "unetpp_tree_seg.pth")
-    torch.save(model.state_dict(), model_path)
     print(f"✅ Training complete. Model saved to: {model_path}")
     print(f"Settings → Epochs: {args.epochs}, Batch Size: {args.batch_size}, Loss: {args.loss}, Optimizer: {args.optimizer}")
 
@@ -281,3 +279,4 @@ if __name__ == '__main__':
     import torch.multiprocessing
     torch.multiprocessing.freeze_support()
     main()
+
