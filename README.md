@@ -25,3 +25,10 @@ Run the training script with desired arguments:
 
 ```bash
 python train.py --args parameter --args parameter
+```
+Deeplabv3 to activate the cbam attention by 
+
+```bash 
+--use_cbam
+```
+Predict the model by `predict.py` under each corresponding model folder because each mode may have different output layout thus predict is for each model sepecifialy 
