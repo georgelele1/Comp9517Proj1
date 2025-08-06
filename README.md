@@ -1,34 +1,81 @@
-# Dataset Preprocessing and Model Training
+Comp9517 Project
+this project is a computer vision project we have included 4 models Unet Deeplabv3 MasKRcnn and PSP-net each model setup will be following steps 
+setup
+before you access the model you have to do a setup 
+bash 
+insteall -r requirements.txt
 
-## 📌 Overview
-This project involves preprocessing a dataset of RGB, NIR, and Mask images, pairing them into `.pkl` files, and training segmentation models such as **Mask R-CNN** and **DeepLabv3**.
+Dataset preprocess
 
----
 
-## 🔧 Preprocessing Steps
+# PSP Net
+## Features
 
-1. **Count Background and Tree Pixels**  
-   Run `count.py` to measure the total number of background pixels and tree pixels in the dataset.
+- PSPNet with a ResNet backbone for deep feature extraction.
+- Pyramid pooling module to capture global context.
+- Skip connections to blend fine details with coarse features.
+- Supports training, validation, and visualization of predictions.
+- Handles unbalanced datasets with optional loss functions.
 
-2. **Pair the Dataset**  
-   Use `datamatch.py` to pair the data from the three folders (**RGB**, **NIR**, and **Mask**) and generate a `.pkl` file.
 
-3. **Access Model Folders**  
-   Navigate into each model’s folder (e.g., `deeplabv3/`, `maskrcnn/`) to run training scripts.
+## Project Structure
 
----
+- main.py: Main script to run training or inference.
+- config.py: Configuration settings (e.g., USE_NRG, INPUT_CHANNELS).
+- utils.py: Helper functions for visualization and metrics.
+- model.py: PSPNet model definition.
+- dataset.py: Custom dataset loader for NRG_images.
+- trainer.py: Training loop and validation logic.
+- usa_segmentation\NRG_images: Directory with RGB + NIR image data.
+- results/: Folder for saving model outputs and visualizations.
 
-## 🚀 Training the Models
-Change the PKL file dict inside the train 
-Both **Mask R-CNN** and **DeepLabv3** support flexible training parameters.  
-Run the training script with desired arguments:
+## Setup
 
-```bash
-python train.py --args parameter --args parameter
+1. Clone the Repository
+
+    (if applicable):
+
+   bash
+
+   `git clone <your-repo-url> cd <project-folder>`
+
+2. Prepare Data
+
+   :
+
+   - Place your images in usa_segmentation\NRG_images (e.g., NRG_wa019_2023_n_33_15_0.png).
+   - Ensure masks are in a corresponding directory (e.g., usa_segmentation\masks).
+   - Images should be 4-channel (RGB + NIR) if USE_NRG = True, or 3-channel (RGB) if USE_NRG = False.
+
+3. **Install Dependencies**: Run the pip command above.
+
+4. Check Config
+
+   :
+
+   - Edit config.py to set USE_NRG = True (for 4 channels) or False (for 3 channels).
+   - Adjust INPUT_CHANNELS and other hyperparameters as needed.
+
+## Usage
+
+Run the project with:
+
+bash
+
 ```
-Deeplabv3 to activate the cbam attention by 
-
-```bash 
---use_cbam
+python main.py --mode train
 ```
-Predict the model by `predict.py` under each corresponding model folder because each mode may have different output layout thus predict is for each model sepecifialy 
+
+- --mode train: Starts training with the dataset.
+- Output will be saved in results/ (e.g., epoch_001_predictions).
+
+### Training Process
+
+- **Data Loading**: Loads images and masks from usa_segmentation\NRG_images using dataset.py.
+- **Model**: PSPNet processes the input with a ResNet backbone and pyramid pooling.
+- **Optimization**: Uses Adam optimizer (default lr 0.001) with a scheduler (e.g., ReduceLROnPlateau).
+- **Loss**: Default is Cross Entropy Loss; can switch to Dice Loss or Focal Loss for unbalanced data.
+- **Visualization**: Generates prediction masks every 10 epochs or at best model, saved as four-panel images (NIR | RGB | Ground Truth | Prediction).
+
+
+
