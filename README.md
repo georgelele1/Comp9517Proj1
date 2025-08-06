@@ -220,10 +220,9 @@ Directory containing the implementation of the U-Net model architecture and rela
 make_paired_samples.py
 Utility script to generate paired datasets (e.g., combining RGB and NIR images with their corresponding masks) and save them as a .pkl file for training and evaluation.
 
-
-3. predict
-
-   Change the model path inisde predict and test your customized model
+```bash
+python train.py --epochs 100 --batch_size 8 --lr 0.0005 --img_size 256 --loss focal+dice --optimizer adam --use_cbam
+```
    
 
 ### Training Process
