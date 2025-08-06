@@ -17,6 +17,8 @@ pip install -r requirements.txt
 
 # Model insturction 
 [Mask Rcnn](##MASK-RCNN)
+[DeeplabV3](##Deeplabv3)
+[PSP Net](##PSP-Net)
 ## MASKRCNN
 ### Features
 
