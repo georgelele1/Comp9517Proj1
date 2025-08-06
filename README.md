@@ -2,10 +2,56 @@
 This project is a computer vision project we have included 4 models Unet Deeplabv3 MasKRcnn and PSP-net each model setup will be following steps 
 setup
 before you access the model you have to do a setup 
-bash 
+```bash 
 insteall -r requirements.txt
+```
 
-Dataset preprocess
+Model insturction 
+# MASK RCNN
+## Features
+
+- Mask R-CNN with a ResNet-FPN backbone for instance segmentation.
+
+- Region Proposal Network (RPN) for detecting objects of varying sizes.
+
+- Multi-task loss combining classification, bounding box regression, and mask prediction.
+
+- Supports training, validation, and per-class evaluation metrics.
+
+- Handles small-object segmentation with customizable anchor sizes.
+
+
+## Project Structure
+
+- train.py: Main script to run training or inference also including dataset
+- predict.py: predict performance with your trained model
+- datamatch: data preprocess of paired dataset
+
+1. Prepare Data
+   
+   Run the datamatch file and get the paired_dataset.pkl file
+
+2. training
+   
+   change the pkl directory inside train file and run the following command to customize your train
+   
+   ```bash
+   python train.py --epochs 100 --batch_size 16 --optimizer adamw --lr 0.001 ......
+   ```
+   
+
+3. predict
+
+   Change th model path inisde predict and test your customized model
+   
+
+### Training Process
+
+- **Data Loading**: Loads images and masks from usa_segmentation\NRG_images using dataset.py.
+- **Model**: PSPNet processes the input with a ResNet backbone and pyramid pooling.
+- **Optimization**: Uses Adam optimizer (default lr 0.001) with a scheduler (e.g., ReduceLROnPlateau).
+- **Loss**: Default is Cross Entropy Loss; can switch to Dice Loss or Focal Loss for unbalanced data.
+- **Visualization**: Generates prediction masks every 10 epochs or at best model, saved as four-panel images (NIR | RGB | Ground Truth | Prediction).
 
 
 # PSP Net
