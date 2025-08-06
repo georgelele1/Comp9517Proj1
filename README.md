@@ -19,7 +19,7 @@ This project involves preprocessing a dataset of RGB, NIR, and Mask images, pair
 ---
 
 ## 🚀 Training the Models
-
+Change the PKL file dict inside the train 
 Both **Mask R-CNN** and **DeepLabv3** support flexible training parameters.  
 Run the training script with desired arguments:
 
