@@ -151,15 +151,11 @@ pip install -r requirements.txt
 
 1. Prepare Data
 
-   :
-
    - Place your images in usa_segmentation\NRG_images (e.g., NRG_wa019_2023_n_33_15_0.png).
    - Ensure masks are in a corresponding directory (e.g., usa_segmentation\masks).
    - Images should be 4-channel (RGB + NIR) if USE_NRG = True, or 3-channel (RGB) if USE_NRG = False.
 
 2. Check Config
-
-   :
 
    - Edit config.py to set USE_NRG = True (for 4 channels) or False (for 3 channels).
    - Adjust INPUT_CHANNELS and other hyperparameters as needed.
@@ -186,6 +182,7 @@ python main.py --mode train
 - **Visualization**: Generates prediction masks every 10 epochs or at best model, saved as four-panel images (NIR | RGB | Ground Truth | Prediction).
 
 ## U Net
+
 ### Features
 
 - U-Net encoder-decoder architecture for semantic segmentation.
@@ -205,20 +202,24 @@ python main.py --mode train
 
 ### Project Structure
 
-Project Structure
-train.py
+- train.py
+  
 Main script for training the U-Net model on your paired dataset. Supports hyperparameter customization, logging, and model saving.
 
-predict.py
+- predict.py
+  
 Script for running inference and evaluating the trained U-Net model on test data. Outputs segmentation results and performance metrics.
 
-dataset.py
+- dataset.py
+  
 Implements the custom SegmentationDataset class for loading images and masks, data augmentation, and preprocessing.
 
-U_Net.py
+- U_Net.py
+  
 Directory containing the implementation of the U-Net model architecture and related modules (e.g., DoubleConv, UNet class).
 
-make_paired_samples.py
+- make_paired_samples.py
+  
 Utility script to generate paired datasets (e.g., combining RGB and NIR images with their corresponding masks) and save them as a .pkl file for training and evaluation.
 
 ```bash
