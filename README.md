@@ -1,14 +1,23 @@
-# Comp9517 Project
-This project is a computer vision project we have included 4 models Unet Deeplabv3 MasKRcnn and PSP-net each model setup will be following steps 
-setup
-before you access the model you have to do a setup 
-```bash 
-insteall -r requirements.txt
+# COMP9517 Project
+
+This project is a computer vision project for tree segmentation.  
+We include four models: **U-Net**, **DeepLabv3**, **Mask R-CNN**, and **PSPNet**.  
+
+Each model follows a similar setup and training workflow.
+
+---
+
+## 🔧 Setup
+
+Before accessing any model, install the dependencies:
+
+```bash
+pip install -r requirements.txt
 ```
 
-Model insturction 
-# MASK RCNN
-## Features
+# Model insturction 
+## MASK RCNN
+### Features
 
 - Mask R-CNN with a ResNet-FPN backbone for instance segmentation.
 
@@ -21,7 +30,7 @@ Model insturction
 - Handles small-object segmentation with customizable anchor sizes.
 
 
-## Project Structure
+### Project Structure
 
 - train.py: Main script to run training or inference also including dataset
 - predict.py: predict performance with your trained model
@@ -36,26 +45,84 @@ Model insturction
    change the pkl directory inside train file and run the following command to customize your train
    
    ```bash
-   python train.py --epochs 100 --batch_size 16 --optimizer adamw --lr 0.001 ......
+   python train.py --epochs 100 --batch_size 8 --lr 0.0005 --img_size 256 --loss focal+dice --optimizer adam 
    ```
    
 
 3. predict
 
-   Change th model path inisde predict and test your customized model
+   Change the model path inisde predict and test your customized model
    
 
 ### Training Process
 
-- **Data Loading**: Loads images and masks from usa_segmentation\NRG_images using dataset.py.
-- **Model**: PSPNet processes the input with a ResNet backbone and pyramid pooling.
-- **Optimization**: Uses Adam optimizer (default lr 0.001) with a scheduler (e.g., ReduceLROnPlateau).
-- **Loss**: Default is Cross Entropy Loss; can switch to Dice Loss or Focal Loss for unbalanced data.
-- **Visualization**: Generates prediction masks every 10 epochs or at best model, saved as four-panel images (NIR | RGB | Ground Truth | Prediction).
+| Argument        | Description                                                               | Default    | Options                                                       |
+| --------------- | ------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------- |
+| `--epochs`      | Number of training epochs                                                 | `100`      | *any integer*                                                 |
+| `--batch_size`  | Training batch size                                                       | `8`        | *any integer*                                                 |
+| `--lr`          | Learning rate                                                             | `0.0005`   | *any float*                                                   |
+| `--img_size`    | Image size (height and width will be square)                              | `256`      | *any integer (e.g., 256, 512)*                                |
+| `--loss`        | Loss function to handle imbalance                                         | `bce+dice` | `bce+dice`, `focal`, `tversky`, `focal+dice`, `focal+tversky` |
+| `--optimizer`   | Optimizer for training                                                    | `adam`     | `adam`, `adamw`, `sgd`                                        |
+| `--num_workers` | Number of data loading workers (set 0 if system has low RAM)              | `0`        | *any integer*                                                 |               |
 
 
-# PSP Net
-## Features
+## Deeplabv3
+### Features
+
+- DeepLabv3 with ResNet backbone for semantic segmentation.
+
+- Atrous Spatial Pyramid Pooling (ASPP) for multi-scale feature extraction.
+
+- Optional CBAM attention module for improved feature selection.
+
+- Handles imbalanced datasets with Dice, Focal, or Tversky loss.
+
+- Supports both RGB-only and RGB + NIR inputs.
+
+- CBAM attention model implementation
+
+
+### Project Structure
+
+- train.py: Main script to run training or inference also including dataset
+- predict.py: predict performance with your trained model
+- datamatch: data preprocess of paired dataset
+
+1. Prepare Data
+   
+   Run the datamatch file and get the paired_dataset.pkl file
+
+2. training
+   
+   change the pkl directory inside train file and run the following command to customize your train
+   
+   ```bash
+   python train.py --epochs 100 --batch_size 8 --lr 0.0005 --img_size 256 --loss focal+dice --optimizer adam --use_cbam
+   ```
+
+
+
+3. predict
+
+   Change the model path inisde predict and test your customized model
+   
+
+### Training Process
+
+| Argument        | Description                                                               | Default    | Options                                                       |
+| --------------- | ------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------- |
+| `--epochs`      | Number of training epochs                                                 | `100`      | *any integer*                                                 |
+| `--batch_size`  | Training batch size                                                       | `8`        | *any integer*                                                 |
+| `--lr`          | Learning rate                                                             | `0.0005`   | *any float*                                                   |
+| `--img_size`    | Image size (height and width will be square)                              | `256`      | *any integer (e.g., 256, 512)*                                |
+| `--loss`        | Loss function to handle imbalance                                         | `bce+dice` | `bce+dice`, `focal`, `tversky`, `focal+dice`, `focal+tversky` |
+| `--optimizer`   | Optimizer for training                                                    | `adam`     | `adam`, `adamw`, `sgd`                                        |
+| `--num_workers` | Number of data loading workers (set 0 if system has low RAM)              | `0`        | *any integer*                                                 |
+| `--use_cbam`    | Enable CBAM (Convolutional Block Attention Module) in the ResNet backbone | `False`    | flag only (add `--use_cbam` to activate)                      |
+
+## PSP Net
+### Features
 
 - PSPNet with a ResNet backbone for deep feature extraction.
 - Pyramid pooling module to capture global context.
@@ -64,7 +131,7 @@ Model insturction
 - Handles unbalanced datasets with optional loss functions.
 
 
-## Project Structure
+### Project Structure
 
 - main.py: Main script to run training or inference.
 - config.py: Configuration settings (e.g., USE_NRG, INPUT_CHANNELS).
@@ -90,7 +157,7 @@ Model insturction
    - Edit config.py to set USE_NRG = True (for 4 channels) or False (for 3 channels).
    - Adjust INPUT_CHANNELS and other hyperparameters as needed.
 
-## Usage
+### Usage
 
 Run the project with:
 
@@ -103,7 +170,7 @@ python main.py --mode train
 - --mode train: Starts training with the dataset.
 - Output will be saved in results/ (e.g., epoch_001_predictions).
 
-### Training Process
+#### Training Process
 
 - **Data Loading**: Loads images and masks from usa_segmentation\NRG_images using dataset.py.
 - **Model**: PSPNet processes the input with a ResNet backbone and pyramid pooling.
