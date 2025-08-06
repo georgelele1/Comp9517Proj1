@@ -17,9 +17,9 @@ pip install -r requirements.txt
 
 # Model insturction 
 - U-Net → see section "U-Net"
-- DeepLabv3 → see section "DeepLabv3"
-- Mask R-CNN → see section "Mask R-CNN"
-- PSPNet → see section "PSPNet"
+- DeepLabv3 → see section "Deeplabv3"
+- Mask R-CNN → see section "MASK RCNN"
+- PSPNet → see section "PSP Net"
 
 ## MASK RCNN
 ### Features
