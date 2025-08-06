@@ -44,7 +44,7 @@ pip install -r requirements.txt
 
 1. Prepare Data
    
-   Run the datamatch file and get the paired_dataset.pkl file
+   Run the datamatch file and get the paired_dataset.pkl file change 
 
 2. training
    
@@ -184,5 +184,58 @@ python main.py --mode train
 - **Loss**: Default is Cross Entropy Loss; can switch to Dice Loss or Focal Loss for unbalanced data.
 - **Visualization**: Generates prediction masks every 10 epochs or at best model, saved as four-panel images (NIR | RGB | Ground Truth | Prediction).
 
+## U Net
+### Features
 
+- U-Net encoder-decoder architecture for semantic segmentation.
+
+- Skip connections for preserving spatial detail and improving boundary accuracy.
+
+- Flexible input channels (supports RGB, NIR, or combined channels).
+
+- Supports a variety of loss functions: Dice, BCE, Focal, Tversky, and their combinations.
+
+- Includes data augmentation (flip, rotate, brightness, etc.) via Albumentations.
+
+- Easily customizable hyperparameters (epochs, batch size, learning rate, etc.).
+
+- Suitable for both small and large segmentation datasets.
+
+
+### Project Structure
+
+Project Structure
+train.py
+Main script for training the U-Net model on your paired dataset. Supports hyperparameter customization, logging, and model saving.
+
+predict.py
+Script for running inference and evaluating the trained U-Net model on test data. Outputs segmentation results and performance metrics.
+
+dataset.py
+Implements the custom SegmentationDataset class for loading images and masks, data augmentation, and preprocessing.
+
+U_Net.py
+Directory containing the implementation of the U-Net model architecture and related modules (e.g., DoubleConv, UNet class).
+
+make_paired_samples.py
+Utility script to generate paired datasets (e.g., combining RGB and NIR images with their corresponding masks) and save them as a .pkl file for training and evaluation.
+
+
+3. predict
+
+   Change the model path inisde predict and test your customized model
+   
+
+### Training Process
+
+| Argument        | Description                                                               | Default    | Options                                                       |
+| --------------- | ------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------- |
+| `--epochs`      | Number of training epochs                                                 | `100`      | *any integer*                                                 |
+| `--batch_size`  | Training batch size                                                       | `8`        | *any integer*                                                 |
+| `--lr`          | Learning rate                                                             | `0.0005`   | *any float*                                                   |
+| `--img_size`    | Image size (height and width will be square)                              | `256`      | *any integer (e.g., 256, 512)*                                |
+| `--loss`        | Loss function to handle imbalance                                         | `bce+dice` | `bce+dice`, `focal`, `tversky`, `focal+dice`, `focal+tversky` |
+| `--optimizer`   | Optimizer for training                                                    | `adam`     | `adam`, `adamw`, `sgd`                                        |
+| `--num_workers` | Number of data loading workers (set 0 if system has low RAM)              | `0`        | *any integer*                                                 |
+| `--use_cbam`    | Enable CBAM (Convolutional Block Attention Module) in the ResNet backbone | `False`    | flag only (add `--use_cbam` to activate)                      |
 
