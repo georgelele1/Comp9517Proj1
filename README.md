@@ -1,5 +1,5 @@
-Comp9517 Project
-this project is a computer vision project we have included 4 models Unet Deeplabv3 MasKRcnn and PSP-net each model setup will be following steps 
+# Comp9517 Project
+This project is a computer vision project we have included 4 models Unet Deeplabv3 MasKRcnn and PSP-net each model setup will be following steps 
 setup
 before you access the model you have to do a setup 
 bash 
@@ -29,17 +29,7 @@ Dataset preprocess
 - usa_segmentation\NRG_images: Directory with RGB + NIR image data.
 - results/: Folder for saving model outputs and visualizations.
 
-## Setup
-
-1. Clone the Repository
-
-    (if applicable):
-
-   bash
-
-   `git clone <your-repo-url> cd <project-folder>`
-
-2. Prepare Data
+1. Prepare Data
 
    :
 
@@ -47,9 +37,7 @@ Dataset preprocess
    - Ensure masks are in a corresponding directory (e.g., usa_segmentation\masks).
    - Images should be 4-channel (RGB + NIR) if USE_NRG = True, or 3-channel (RGB) if USE_NRG = False.
 
-3. **Install Dependencies**: Run the pip command above.
-
-4. Check Config
+2. Check Config
 
    :
 
