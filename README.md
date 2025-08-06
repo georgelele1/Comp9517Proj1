@@ -6,6 +6,9 @@ We include four models: **U-Net**, **DeepLabv3**, **Mask R-CNN**, and **PSPNet**
 Each model follows a similar setup and training workflow.
 
 ---
+## Content
+- [Set up](#Setup)
+- [Model insturction](#Model-insturction)
 
 ## 🔧 Setup
 
@@ -16,9 +19,9 @@ pip install -r requirements.txt
 ```
 
 # Model insturction 
-[Mask Rcnn](#MASK-RCNN)
-[DeeplabV3](#Deeplabv3)
-[PSP Net](#PSP-Net)
+- [Mask Rcnn](#MASK-RCNN)
+- [DeeplabV3](#Deeplabv3)
+- [PSP Net](#PSP-Net)
 ## MASKRCNN
 ### Features
 
